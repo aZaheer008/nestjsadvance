@@ -1,8 +1,10 @@
-import { Controller,Inject, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { CircuitBreakerInterceptor } from './../common/interceptors/circuit-breaker/circuit-breaker.interceptor';
+import { Controller,Inject, Get, Post, Body, Patch, Param, Delete, UseInterceptors,RequestTimeoutException } from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
+@UseInterceptors(CircuitBreakerInterceptor)
 @Controller('coffees')
 export class CoffeesController {
   constructor(@Inject(CoffeesService) private readonly coffeesService: CoffeesService) {}
@@ -14,7 +16,8 @@ export class CoffeesController {
 
   @Get()
   findAll() {
-    return this.coffeesService.findAll();
+    console.log('Findall Executed');
+    throw new RequestTimeoutException('Error');
   }
 
   @Get(':id')
