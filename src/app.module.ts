@@ -6,6 +6,7 @@ import { SchedulerModule } from './scheduler/scheduler.module';
 import { CronModule } from './cron/cron.module';
 import { FibonacciModule } from './fibonacci/fibonacci.module';
 import { HttpClientModule } from './http-client/http-client.module';
+import { RecipesModule } from './recipes/recipes.module';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { HttpClientModule } from './http-client/http-client.module';
     SchedulerModule, 
     CronModule, 
     FibonacciModule, 
-    HttpClientModule.register({ baseUrl: 'http://nestjs.com' })
+    HttpClientModule.register({ baseUrl: 'http://nestjs.com' }), RecipesModule
   ],
   controllers: [AppController],
   providers: [AppService],
