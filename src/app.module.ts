@@ -8,14 +8,17 @@ import { FibonacciModule } from './fibonacci/fibonacci.module';
 import { HttpClientModule } from './http-client/http-client.module';
 import { RecipesModule } from './recipes/recipes.module';
 import { TagsModule } from './tags/tags.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
   imports: [
+    EventEmitterModule.forRoot(),
     CoffeesModule, 
     SchedulerModule, 
     CronModule, 
     FibonacciModule, 
-    HttpClientModule.register({ baseUrl: 'http://nestjs.com' }), RecipesModule, TagsModule
+    HttpClientModule.register({ baseUrl: 'http://nestjs.com' }), RecipesModule, TagsModule, PaymentsModule
   ],
   controllers: [AppController],
   providers: [AppService],
