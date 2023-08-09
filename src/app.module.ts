@@ -13,9 +13,13 @@ import { PaymentsModule } from './payments/payments.module';
 import { DataSourceModule } from './data-source/data-source.module';
 import { UsersModule } from './users/users.module';
 import { ContextIdFactory } from '@nestjs/core';
-import { AggregateByTenantContextIdStrategy } from './core/aggregate-by-tenant.strategy';
+// import { AggregateByTenantContextIdStrategy } from './core/aggregate-by-tenant.strategy';
+import { I18nModule } from './i18n/i18n.module';
+import { AggregateByLocaleContextIdStrategy } from './core/aggregate-by-local.strategy';
+import { I18nService } from './i18n/i18n.service';
 
-ContextIdFactory.apply(new AggregateByTenantContextIdStrategy());
+// ContextIdFactory.apply(new AggregateByTenantContextIdStrategy());
+ContextIdFactory.apply(new AggregateByLocaleContextIdStrategy());
 
 @Module({
   imports: [
@@ -24,9 +28,9 @@ ContextIdFactory.apply(new AggregateByTenantContextIdStrategy());
     SchedulerModule, 
     CronModule, 
     FibonacciModule, 
-    HttpClientModule.register({ baseUrl: 'http://nestjs.com' }), RecipesModule, TagsModule, PaymentsModule, DataSourceModule, UsersModule
+    HttpClientModule.register({ baseUrl: 'http://nestjs.com' }), RecipesModule, TagsModule, PaymentsModule, DataSourceModule, UsersModule, I18nModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,I18nService],
 })
 export class AppModule {}
